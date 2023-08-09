@@ -25,10 +25,8 @@ class Solution {
 		vector<bool>visited(V, false);
 		for(int i = 0; i < V; i++){
 		    //if vertex is not visited, we call the function to detect cycle.
-			if(!visited[i]){
-				bool cycle = dfs(i, -1, adj, visited);
-				if(cycle) return true;
-			}
+			if(!visited[i] && dfs(i, -1, adj, visited)) return true;
+
 		}
 		return false;
 	}
