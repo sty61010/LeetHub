@@ -6,11 +6,11 @@ using namespace std;
 class Solution {
   public:
     bool dfs(int cur, vector<int> adj[], vector<int> &vis){
-        if(vis[cur] == 1) return false;
-        if(vis[cur] == 0) return true;
-        vis[cur] = 0;
+        if(vis[cur] == 0) return false; // already visited
+        if(vis[cur] == 1) return true; // cycle detected
+        vis[cur] = 1; // visiting
         for(auto a: adj[cur]) if(dfs(a, adj, vis)) return true;
-        vis[cur] = 1;
+        vis[cur] = 0; // visited
         return false;
     }
     // Function to detect cycle in a directed graph.
