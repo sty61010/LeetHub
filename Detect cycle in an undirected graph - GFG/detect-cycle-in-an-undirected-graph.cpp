@@ -5,31 +5,22 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-	bool dfs(int u, int par, vector<int>adj[], vector<bool>&vis){
-		if(vis[u]) return true;
-
-		vis[u] = true;    //marking the current vertex as visited.
-		
-		for(auto v: adj[u]){    //iterating on all the adjacent vertices.
-			if(v == par) continue;
-				
-			//if current vertex is visited, we return true else we call the function recursively to detect the cycle.
-			
-			if(dfs(v, u, adj, vis)) return true;
-		}
-		return false;
-	}
-	
-	
-	bool isCycle(int V, vector<int> adj[]){
-		vector<bool>visited(V, false);
-		for(int i = 0; i < V; i++){
-		    //if vertex is not visited, we call the function to detect cycle.
-			if(!visited[i] && dfs(i, -1, adj, visited)) return true;
-
-		}
-		return false;
-	}
+    bool dfs(int cur, vector<int> adj[], vector<int>&vis, int par){
+        if(vis[cur]) return true;
+        vis[cur] = 1;
+        for(auto a: adj[cur]){
+            if(a == par) continue;
+            if(dfs(a, adj, vis, cur)) return true;
+        }
+        return false;
+    }
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> vis(V, 0);
+        for(int i = 0; i < V; i++) if(!vis[i] && dfs(i, adj, vis, -1)) return true;
+        return false;
+    }
 };
 
 //{ Driver Code Starts.
