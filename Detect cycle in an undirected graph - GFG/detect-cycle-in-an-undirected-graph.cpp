@@ -6,6 +6,8 @@ using namespace std;
 class Solution {
   public:
 	bool dfs(int u, int par, vector<int>adj[], vector<bool>&vis){
+		if(vis[u]) return true;
+
 		vis[u] = true;    //marking the current vertex as visited.
 		
 		for(auto v: adj[u]){    //iterating on all the adjacent vertices.
@@ -13,9 +15,7 @@ class Solution {
 				
 			//if current vertex is visited, we return true else we call the function recursively to detect the cycle.
 			
-			if(vis[v]) return true;
-			if(dfs(v, u, adj, vis))
-				return true;
+			if(dfs(v, u, adj, vis)) return true;
 		}
 		return false;
 	}
